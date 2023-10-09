@@ -12,10 +12,12 @@ console.log(notes)
 // console.log(validator.isEmail('somename@example.com'))
 // console.log(validator.isURL('https://www.wealt.it'))
 
-const success = chalk.green.inverse.bold
-const warning = chalk.hex('#FFA500')
-const error = chalk.bold.red
+const success = chalk.blue.inverse.bold
+// const warning = chalk.hex('#FFA500')
+// const error = chalk.bold.red
 
-console.log(success('done! successful!'))
-console.log(warning('Warning!'))
-console.log(error('Error!'))
+console.log(success('Successful!'))
+// console.log(warning('Warning!'))
+// console.log(error('Error!'))
+
+console.log(Bun.argv[2])
