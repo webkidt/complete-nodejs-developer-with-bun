@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { getNotes } from './notes'
+import { getNotes, addNote, removeNote } from './notes'
 
 yargs()
   .command({
@@ -20,14 +20,21 @@ yargs()
       }
     },
     handler: function (argv) {
-      console.log(`Title: ${argv.title}\nBody: ${argv.body}`)
+      addNote(argv.title, argv.body)
     },
   })
   .command({
     command: 'remove',
     describe: 'Remove a note',
-    handler: function () {
-      console.log('Removing the note')
+    builder: {
+      title: {
+        describe: 'Note title',
+        demandOption: true,
+        type: 'string',
+      },
+    },
+    handler: function (argv) {
+      removeNote(argv.title)
     },
   })
   .command({
