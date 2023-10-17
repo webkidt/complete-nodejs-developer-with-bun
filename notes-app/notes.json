@@ -1,9 +1,1 @@
-[
-  { "title": "Command-Line Notes", "body": "Welcome to the world of command-line notes" },
-  { "title": "Ideology Time", "body": "Now is the winter of our discontent" },
-  { "title": "Summer Gem", "body": "Made glorious summer by this sun of York" },
-  { "title": "Hello!", "body": "Hello, World! Is it me you're looking for?" },
-  { "title": "Shoe Shopping", "body": "Lorem ipsum dolor sit amet" },
-  { "title": "Groceries List", "body": "Lorem ipsum dolor sit amet" },
-  { "title": "Foo Bar", "body": "Foo Lorem ipsum dolor sit amet Bar" }
-]
+[{"title":"Command-Line Notes","body":"Welcome to the world of command-line notes"},{"title":"Ideology Time","body":"Now is the winter of our discontent"},{"title":"Summer Gem","body":"Made glorious summer by this sun of York"},{"title":"Hello!","body":"Hello, World! Is it me you're looking for?"},{"title":"Shoe Shopping","body":"Lorem ipsum dolor sit amet"},{"title":"Groceries List","body":"Lorem ipsum dolor sit amet"},{"title":"Foo Bar","body":"Foo Lorem ipsum dolor sit amet Bar"},{"title":"Empty Body","body":""}]

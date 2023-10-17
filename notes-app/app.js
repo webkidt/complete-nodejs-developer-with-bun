@@ -1,6 +1,6 @@
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { getNotes, addNote, removeNote, listNotes, readNote } from './notes'
+import { addNote, removeNote, listNotes, readNote } from './notes'
 
 yargs()
   .command({

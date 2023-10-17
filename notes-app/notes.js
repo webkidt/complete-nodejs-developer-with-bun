@@ -1,9 +1,5 @@
 import chalk from 'chalk'
 
-const getNotes = () => {
-  return 'Your notes...'
-}
-
 const addNote = async (title, body) => {
   const notes = await loadNotes()
 
@@ -68,4 +64,4 @@ const loadNotes = async () => {
   }
 }
 
-export { getNotes, addNote, removeNote, listNotes, readNote }
+export { addNote, removeNote, listNotes, readNote }
