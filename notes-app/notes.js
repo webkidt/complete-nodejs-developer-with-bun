@@ -34,6 +34,14 @@ const removeNote = async (title) => {
   }
 }
 
+const listNotes = async () => {
+  const notes = await loadNotes()
+  console.log(chalk.blue.bold.underline('Your notes'))
+  notes.forEach((note) => {
+    console.log(` * ${note.title}`)
+  })
+}
+
 const saveNotes = async (notes) => {
   const JSONData = JSON.stringify(notes)
   await Bun.write('notes.json', JSONData)
@@ -49,4 +57,4 @@ const loadNotes = async () => {
   }
 }
 
-export { getNotes, addNote, removeNote }
+export { getNotes, addNote, removeNote, listNotes }

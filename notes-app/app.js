@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { getNotes, addNote, removeNote } from './notes'
+import { getNotes, addNote, removeNote, listNotes } from './notes'
 
 yargs()
   .command({
@@ -41,7 +41,7 @@ yargs()
     command: 'list',
     describe: 'List your notes',
     handler() {
-      console.log('Listing out all notes')
+      listNotes()
     }
   })
   .command({
