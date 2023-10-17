@@ -19,7 +19,6 @@ const addNote = async (title, body) => {
   } else {
     console.log(chalk.bgRed.bold('Note title taken!'))
   }
-
 }
 
 const removeNote = async (title) => {

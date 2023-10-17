@@ -1,4 +1,3 @@
-import chalk from 'chalk'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import { getNotes, addNote, removeNote, listNotes, readNote } from './notes'
@@ -17,7 +16,7 @@ yargs()
         describe: 'Content of your note',
         demandOption: true,
         type: 'string',
-      }
+      },
     },
     handler(argv) {
       addNote(argv.title, argv.body)
@@ -42,7 +41,7 @@ yargs()
     describe: 'List your notes',
     handler() {
       listNotes()
-    }
+    },
   })
   .command({
     command: 'read',
@@ -52,12 +51,11 @@ yargs()
         discribe: 'Note title',
         demandOption: true,
         type: 'string',
-      }
+      },
     },
     handler(argv) {
       readNote(argv.title)
-    }
+    },
   })
   .version('1.1.0')
   .parse(hideBin(Bun.argv))
-
