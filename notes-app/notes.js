@@ -7,9 +7,9 @@ const getNotes = () => {
 const addNote = async (title, body) => {
   const notes = await loadNotes()
 
-  const duplicateNotes = notes.filter((note) => note.title === title)
+  const duplicateNote = notes.find((note) => note.title === title)
 
-  if (duplicateNotes.length === 0) {
+  if (!duplicateNote) {
     notes.push({
       title,
       body,
