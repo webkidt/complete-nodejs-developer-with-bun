@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { getNotes, addNote, removeNote, listNotes } from './notes'
+import { getNotes, addNote, removeNote, listNotes, readNote } from './notes'
 
 yargs()
   .command({
@@ -47,8 +47,15 @@ yargs()
   .command({
     command: 'read',
     describe: 'Read a note',
-    handler() {
-      console.log('Reading a note')
+    builder: {
+      title: {
+        discribe: 'Note title',
+        demandOption: true,
+        type: 'string',
+      }
+    },
+    handler(argv) {
+      readNote(argv.title)
     }
   })
   .version('1.1.0')

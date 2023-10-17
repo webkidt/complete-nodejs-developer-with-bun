@@ -42,6 +42,18 @@ const listNotes = async () => {
   })
 }
 
+const readNote = async (title) => {
+  const notes = await loadNotes()
+  const note = notes.find((note) => note.title === title)
+
+  if (note) {
+    console.log(chalk.blue.underline.bold(note.title))
+    console.log(' * ' + note.body)
+  } else {
+    console.log(chalk.bgRed.bold('No note found!'))
+  }
+}
+
 const saveNotes = async (notes) => {
   const JSONData = JSON.stringify(notes)
   await Bun.write('notes.json', JSONData)
@@ -57,4 +69,4 @@ const loadNotes = async () => {
   }
 }
 
-export { getNotes, addNote, removeNote, listNotes }
+export { getNotes, addNote, removeNote, listNotes, readNote }
