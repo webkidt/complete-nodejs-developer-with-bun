@@ -5,23 +5,33 @@ const weatherStackURL =
   try {
     const weatherResponse = await fetch(weatherStackURL)
     const weatherData = await weatherResponse.json()
-    console.log(
-      `${weatherData.current.weather_descriptions[0]}: It is currently ${weatherData.current.temperature} degrees out. It feels like ${weatherData.current.feelslike} degrees out.`
-    )
+
+    if (weatherData.error) {
+      console.log('unable to find location', weatherData.error.info)
+    } else {
+      console.log(
+        `${weatherData.current.weather_descriptions[0]}: It is currently ${weatherData.current.temperature} degrees out. It feels like ${weatherData.current.feelslike} degrees out.`
+      )
+    }
   } catch (error) {
-    console.log(error)
+    console.log('unable to connect to weather service', error)
   }
 
 // Purpose: To fetch geocoding data (lat,long) from mapbox API
 const mapboxURL =
-  'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1Ijoid2Via2lkdCIsImEiOiJjanRzanVxb3MwbDRtNDNtbWFzdThyM3cyIn0.hdCpPCJVpGlvpkwO9iqZ_Q&limit=1'
+  'https://api.mapbox.com/geocoding/v5/mapbox.places/Plateau%20Nigeria.json?access_token=pk.eyJ1Ijoid2Via2lkdCIsImEiOiJjanRzanVxb3MwbDRtNDNtbWFzdThyM3cyIn0.hdCpPCJVpGlvpkwO9iqZ_Q&limit=1'
 
   try {
     const mapboxResponse = await fetch(mapboxURL)
     const mapboxData = await mapboxResponse.json()
-    const [feature] = mapboxData.features
-    const [long, lat] = feature.center
-    console.log(`Latitude: ${lat}, Longitude: ${long}`)
+
+    if (mapboxData.features.length === 0) {
+      console.log('unable to find location')
+    } else {
+      const [feature] = mapboxData.features
+      const [long, lat] = feature.center
+      console.log(`Latitude: ${lat}, Longitude: ${long}`)
+    }
   } catch (error) {
     console.log(error)
   }
