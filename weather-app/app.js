@@ -9,10 +9,10 @@ const getForecast = (arr) => {
   } else {
     const location = arr.slice(2).join('')
     geocode(location)
-      .then((geoData) => {
-        forecast(geoData.latitude, geoData.longitude)
+      .then(({ latitude, longitude, location }) => {
+        forecast(latitude, longitude)
           .then((forecastData) => {
-            console.log(geoData.location)
+            console.log(location)
             console.log(forecastData)
           })
           .catch((error) => {

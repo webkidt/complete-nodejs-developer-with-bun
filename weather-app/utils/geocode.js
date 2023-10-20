@@ -6,16 +6,18 @@ const geocode = async (address) => {
   try {
     const response = await fetch(url)
     const data = await response.json()
+    const { features } = data
 
-    if (data.features.length === 0) {
+    if (features.length === 0) {
       console.error('unable to find location.Try another search')
     } else {
-      const [feature] = data.features
-      const [long, lat] = feature.center
+      const [feature] = features
+      const { center, place_name } = feature
+      const [longitude, latitude] = center
       return {
-        latitude: lat,
-        longitude: long,
-        location: feature.place_name,
+        latitude,
+        longitude,
+        location: place_name,
       }
     }
   } catch (error) {

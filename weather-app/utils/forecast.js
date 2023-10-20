@@ -5,11 +5,13 @@ const forecast = async (lat, long) => {
   try {
     const request = await fetch(url)
     const data = await request.json()
+    const { error, current } = data
+    const { weather_descriptions, temperature, feelslike } = current
 
-    if (data.error) {
-      console.error('unable to find location:', data.error.info)
+    if (error) {
+      console.error('unable to find location:', error.info)
     } else {
-      return `${data.current.weather_descriptions[0]}: It is currently ${data.current.temperature} degrees out. It feels like ${data.current.feelslike} degrees out.`
+      return `${weather_descriptions[0]}: It is currently ${temperature} degrees out. It feels like ${feelslike} degrees out.`
     }
   } catch (error) {
     console.error('unable to connect to weather service', error)
