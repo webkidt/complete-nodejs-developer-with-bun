@@ -2,8 +2,19 @@ import geocode from './utils/geocode'
 import forecast from './utils/forecast'
 
 // fetch coordinates for a given location
-const data = await geocode('Abuja Nigeria')
-console.log(data)
+geocode('Plateau Nigeria')
+  .then((geoData) => {
+    forecast(geoData.latitude, geoData.longitude)
+      .then((forecastData) => {
+        console.log(geoData.location)
+        console.log(forecastData)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  })
+  .catch((error) => {
+    console.log(error)
+  })
 
-// fetch weather for a given location
-forecast(9.896527, 8.858331)
+
