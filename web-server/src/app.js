@@ -1,17 +1,11 @@
 import express from 'express'
-import { builtinModules } from 'module'
+import { join } from 'path'
 
 const app = express()
 const port = 3000
+const publicDirectoryPath = join(import.meta.dir, '../public')
 
-app.get('/', (req, res) => {
-
-  res.send('<h1>Weather</h1>')
-})
-
-app.get('/about', (req, res) => {
-  res.send('<h1>About WeatherAPI</h1>')
-})
+app.use(express.static(publicDirectoryPath))
 
 app.get('/weather', (req, res) => {
   res.send({
@@ -20,12 +14,6 @@ app.get('/weather', (req, res) => {
   })
 })
 
-app.get('/help', (req, res) => {
-  res.send({
-    name: 'David',
-    age: 28,
-  })
-})
 
 app.listen(port, () => {
   console.log(`Server is up and running on port: ${port}`)
