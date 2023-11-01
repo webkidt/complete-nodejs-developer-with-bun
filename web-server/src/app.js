@@ -5,7 +5,31 @@ const app = express()
 const port = 3000
 const publicDirectoryPath = join(import.meta.dir, '../public')
 
+app.set('view engine', 'hbs')
 app.use(express.static(publicDirectoryPath))
+app.set('views', join(import.meta.dir, '../views'))
+
+app.get('', (req, res) => {
+  res.render('index', {
+    title: 'Weather',
+    name: 'David Pam',
+  })
+})
+
+app.get('/about', (req, res) => {
+  res.render('about', {
+    title: 'About Me',
+    name: 'David Pam',
+  })
+})
+
+app.get('/help', (req, res) => {
+  res.render('help', {
+    title: 'Help',
+    name: 'David Pam',
+    helpText: 'This is some helpful text.',
+  })
+})
 
 app.get('/weather', (req, res) => {
   res.send({
