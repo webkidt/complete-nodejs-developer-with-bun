@@ -1,13 +1,22 @@
 import express from 'express'
 import { join } from 'path'
+const hbs = require('hbs')
 
 const app = express()
 const port = 3000
-const publicDirectoryPath = join(import.meta.dir, '../public')
 
+// Paths for Express config
+const publicDirectoryPath = join(import.meta.dir, '../public')
+const viewsPath = join(import.meta.dir, '../templates/views')
+const partialsPath = join(import.meta.dir, '../templates/partials')
+
+// Setup handlebars engine and views location
 app.set('view engine', 'hbs')
+app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
+
+// Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
-app.set('views', join(import.meta.dir, '../views'))
 
 app.get('', (req, res) => {
   res.render('index', {
