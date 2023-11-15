@@ -1,5 +1,7 @@
 import express from 'express'
 import { join } from 'path'
+import forecast from './utils/forecast'
+import geocode from './utils/geocode'
 const hbs = require('hbs')
 
 const app = express()
@@ -40,15 +42,40 @@ app.get('/help', (req, res) => {
   })
 })
 
-app.get('/weather', (req, res) => {
-if (!req.query.address) {
-  return res.send({ error: 'You must provide an address!' })
-}
-  res.send({
-    location: 'Plateau, Nigeria',
-    forecast: `Chilly: it's 8 degrees out but feels like 6 degrees outside`,
-    address: req.query.address,
-  })
+app.get('/weather', async (req, res) => {
+  if (!req.query.address) {
+    return res.send({ error: 'You must provide an address!' })
+  }
+
+  const { address } = req.query
+
+  try {
+    const geocodeResponse = await geocode(address)
+
+    if (geocodeResponse.error) {
+      return res.send({ error: geocodeResponse.error })
+    }
+
+    const { latitude, longitude, location } = geocodeResponse
+
+    try {
+      const forecastResponse = await forecast(latitude, longitude)
+
+      if (forecastResponse.error) {
+        return res.send({ error: forecastResponse.error })
+      }
+
+      res.send({
+        forecast: forecastResponse.forecast,
+        location,
+        address,
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 app.get('/orders', (req, res) => {
@@ -64,7 +91,7 @@ app.get('/help/*', (req, res) => {
   res.render('404', {
     title: '404',
     name: 'David Pam',
-    errorMessage: 'Help article not found'
+    errorMessage: 'Help article not found',
   })
 })
 
@@ -76,8 +103,6 @@ app.get('*', (req, res) => {
   })
 })
 
-
 app.listen(port, () => {
   console.log(`Server is up and running on port: ${port}`)
 })
-
