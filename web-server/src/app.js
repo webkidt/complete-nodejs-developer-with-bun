@@ -41,9 +41,22 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
+if (!req.query.address) {
+  return res.send({ error: 'You must provide an address!' })
+}
   res.send({
     location: 'Plateau, Nigeria',
     forecast: `Chilly: it's 8 degrees out but feels like 6 degrees outside`,
+    address: req.query.address,
+  })
+})
+
+app.get('/orders', (req, res) => {
+  if (!req.query.search) {
+    return res.send({ error: 'You must provide search query' })
+  }
+  res.send({
+    orders: [],
   })
 })
 
