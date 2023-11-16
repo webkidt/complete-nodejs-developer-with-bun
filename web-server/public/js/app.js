@@ -1,17 +1,24 @@
 console.log('client side javascript file is loaded')
 
-try {
-  const res = await fetch('http://localhost:3000/weather?address=Boston')
-  const forecastData = await res.json()
+const weatherForm = document.querySelector('form')
+const search = document.querySelector('input')
 
-  if (forecastData.error) {
-    console.error(forecastData.error)
-  } else {
+weatherForm.addEventListener('submit', async (e) => {
+  e.preventDefault()
+
+  const location = search.value
+
+  try {
+    const res = await fetch(`http://localhost:3000/weather?address=${location}`)
+    const forecastData = await res.json()
+
+    if (forecastData.error) {
+      return console.error(forecastData.error)
+    }
+
     console.log(forecastData.location)
     console.log(forecastData.forecast)
+  } catch (error) {
+    console.error(error)
   }
-
-
-} catch (error) {
-  console.error(error)
-}
+})
