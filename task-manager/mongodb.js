@@ -9,10 +9,34 @@ try {
   await client.connect()
   const db = client.db(databaseName)
 
-  await db.collection('users').insertOne({
-    name: 'David',
-    age: 27,
-  })
+  // insert one document
+  const insertOneResult = await db
+    .collection('users')
+    .insertOne({
+      name: 'David',
+      age: 27,
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+  console.log(insertOneResult)
+
+  const insertManyResult = await db
+    .collection('users')
+    .insertMany([
+      {
+        name: 'Joy',
+        age: 24,
+      },
+      {
+        name: 'Victor',
+        age: 22,
+      },
+    ])
+    .catch((error) => {
+      console.error(error)
+    })
+  console.log(insertManyResult)
 } catch (error) {
   console.error(error)
 }
