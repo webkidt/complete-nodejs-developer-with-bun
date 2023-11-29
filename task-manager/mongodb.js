@@ -10,26 +10,26 @@ try {
   await client.connect()
   const db = client.db(databaseName)
 
-  // find one user
-  // const user = await db
-  //   .collection('users')
-  //   .findOne({ _id: new ObjectId('655ecd3bd2efffe39a1240ec') })
-  //   .catch((error) => console.error(error))
-  // console.log(user)
+  // get task by id
+  const task = await db
+    .collection('tasks')
+    .findOne({ _id: new ObjectId('655ac0c59c9eee80d7300883') })
+    .catch((error) => console.error(error))
+  console.log(task)
 
-  // find many users
-  const users = await db
-    .collection('users')
-    .find({ age: 26 })
+  // find all tasks that are not completed
+  const tasks = await db
+    .collection('tasks')
+    .find({ completed: false })
     .toArray()
     .catch((error) => console.error(error))
-  console.log(users)
+  console.log(tasks)
 
-  const countUsers = await db
-    .collection('users')
-    .countDocuments({ age: 26 })
+  const countCompletedTasks = await db
+    .collection('tasks')
+    .countDocuments({ completed: true })
     .catch((error) => console.error(error))
-  console.log(countUsers)
+  console.log(countCompletedTasks)
 } catch (error) {
   console.error(error)
 }
