@@ -10,6 +10,38 @@ try {
   await client.connect()
   const db = client.db(databaseName)
 
+  // insert one document to tasks collection
+  // await db
+  //   .collection('tasks')
+  //   .insertOne({
+  //     description: 'take a nap',
+  //     completed: true,
+  //   })
+  //   .catch((error) => {
+  //     console.error(error)
+  //   })
+
+  // insert many documents to tasks collection
+  // await db
+  //   .collection('tasks')
+  //   .insertMany([
+  //     {
+  //       description: 'Clean the house',
+  //       completed: true,
+  //     },
+  //     {
+  //       description: 'Renew inspection',
+  //       completed: false,
+  //     },
+  //     {
+  //       description: 'Pot plants',
+  //       completed: false,
+  //     },
+  //   ])
+  //   .catch((error) => {
+  //     console.error(error)
+  //   })
+
   // get task by id
   const task = await db
     .collection('tasks')
