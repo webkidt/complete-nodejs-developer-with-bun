@@ -5,47 +5,31 @@ const databaseName = 'task-manager'
 
 const client = new MongoClient(url)
 const id = new ObjectId()
-console.log(id.id.length)
-console.log(id.toHexString().length)
-console.log(id.getTimestamp())
 
 try {
   await client.connect()
   const db = client.db(databaseName)
 
-  // insert one document to users collection
-  // const insertOneResult = await db
+  // find one user
+  // const user = await db
   //   .collection('users')
-  //   .insertOne({
-  //     _id: id,
-  //     name: 'Joseph',
-  //     age: 26,
-  //   })
-  //   .catch((error) => {
-  //     console.error(error)
-  //   })
-  // console.log(insertOneResult)
+  //   .findOne({ _id: new ObjectId('655ecd3bd2efffe39a1240ec') })
+  //   .catch((error) => console.error(error))
+  // console.log(user)
 
-  // insert many documents to tasks collection
-  // await db
-  //   .collection('tasks')
-  //   .insertMany([
-  //     {
-  //       description: 'Clean the house',
-  //       completed: true,
-  //     },
-  //     {
-  //       description: 'Renew inspection',
-  //       completed: false,
-  //     },
-  //     {
-  //       description: 'Pot plants',
-  //       completed: false,
-  //     },
-  //   ])
-  //   .catch((error) => {
-  //     console.error(error)
-  //   })
+  // find many users
+  const users = await db
+    .collection('users')
+    .find({ age: 26 })
+    .toArray()
+    .catch((error) => console.error(error))
+  console.log(users)
+
+  const countUsers = await db
+    .collection('users')
+    .countDocuments({ age: 26 })
+    .catch((error) => console.error(error))
+  console.log(countUsers)
 } catch (error) {
   console.error(error)
 }
